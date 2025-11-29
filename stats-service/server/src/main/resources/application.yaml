@@ -1,0 +1,27 @@
+server:
+  port: 9090
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          client:
+            RestTemplate: DEBUG
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+  sql:
+    init:
+      mode: never
+
+  datasource:
+    url: jdbc:postgresql://stats-db:5432/stat
+    username: postgres
+    password: postgres
