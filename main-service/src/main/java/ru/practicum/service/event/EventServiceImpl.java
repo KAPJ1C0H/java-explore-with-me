@@ -65,7 +65,6 @@ public class EventServiceImpl implements EventService {
         event.setRequestModeration(newEvent.getRequestModeration() != null ? newEvent.getRequestModeration() : true);
         Event saveEvent = eventRepo.save(event);
         saveEvent.setState(EventStat.PENDING);
-        //  saveEvent.setViews(statsService.getStats(saveEvent.getCreatedOn(), LocalDateTime.now(), "/users/{userId}/events"));
         log.debug("Event pass validation");
         return eventMapper.toEventFullDto(saveEvent);
     }
@@ -279,7 +278,6 @@ public class EventServiceImpl implements EventService {
         Optional.ofNullable(dto.getTitle()).ifPresent(event::setTitle);
 
         if (dto.getStateAction() != null) {
-//            event.setState(EventStat.PENDING);
             if (dto.getStateAction() == StatForUser.SEND_TO_REVIEW) {
                 event.setState(EventStat.PENDING);
             } else {
@@ -319,7 +317,6 @@ public class EventServiceImpl implements EventService {
 
         events.forEach(e -> {
             uriToEventMap.put("/events/" + e.getId(), e);
-//            e.setViews(0L);
         });
 
         List<ViewStatsResponseDto> stats = statsService.getStats(startTime, endTime, uris);

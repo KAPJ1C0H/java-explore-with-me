@@ -42,7 +42,6 @@ public class RequestServiceImpl implements RequestService {
             throw new RequestAlreadyExistException("Request already exists");
         }
         log.debug(eventId.toString());
-//        Event event = eventRepository.findById(eventId).orElseThrow(() -> new EventNotExistException("Event doesnt exist"));
         Optional<Event> event1 = eventRepository.findById(eventId);
         if (!event1.isPresent()) {
             throw new EvetnValidationException("Event doesnt exist");
@@ -72,50 +71,6 @@ public class RequestServiceImpl implements RequestService {
         if (event.getParticipantLimit() == 0) request.setStatus(RequestStatus.CONFIRMED);
         return RequestMapper.toRequestDto(requestRepository.save(request));
     }
-
-//    @Transactional
-//    @Override
-//    public RequestStatusUpdateResult updateRequests(Long userId, Long eventId, RequestStatusUpdateDto requestStatusUpdateDto) {
-//        Event event = eventRepository.findById(eventId).orElseThrow(() -> new EventNotExistException("Event doesn't exist"));
-//        RequestStatusUpdateResult result = new RequestStatusUpdateResult();
-//
-//        if (!event.getRequestModeration() || event.getParticipantLimit() == 0) {
-//            return result;
-//        }
-//
-//        List<Request> requests = requestRepository.findAllByEventWithInitiator(userId, eventId);
-//        List<Request> requestsToUpdate = requests.stream().filter(x -> requestStatusUpdateDto.getRequestIds().contains(x.getId())).collect(Collectors.toList());
-//
-//        if (requestsToUpdate.stream().anyMatch(x -> x.getStatus().equals(RequestStatus.CONFIRMED) && requestStatusUpdateDto.getStatus().equals(RequestStatusToUpdate.REJECTED))) {
-//            throw new RequestAlreadyConfirmedException("request already confirmed");
-//        }
-//
-//        if (event.getConfirmedRequests() + requestsToUpdate.size() > event.getParticipantLimit() && requestStatusUpdateDto.getStatus().equals(RequestStatusToUpdate.CONFIRMED)) {
-//            throw new ParticipantLimitException("exceeding the limit of participants");
-//        }
-//
-//        for (Request x : requestsToUpdate) {
-//            x.setStatus(RequestStatus.valueOf(requestStatusUpdateDto.getStatus().toString()));
-//        }
-//
-//        requestRepository.saveAll(requestsToUpdate);
-//
-//        if (requestStatusUpdateDto.getStatus().equals(RequestStatusToUpdate.CONFIRMED)) {
-//            event.setConfirmedRequests(event.getConfirmedRequests() + requestsToUpdate.size());
-//        }
-//
-//        eventRepository.save(event);
-//
-//        if (requestStatusUpdateDto.getStatus().equals(RequestStatusToUpdate.CONFIRMED)) {
-//            result.setConfirmedRequests(requestMapper.toRequestDtoList(requestsToUpdate));
-//        }
-//
-//        if (requestStatusUpdateDto.getStatus().equals(RequestStatusToUpdate.REJECTED)) {
-//            result.setRejectedRequests(requestMapper.toRequestDtoList(requestsToUpdate));
-//        }
-//
-//        return result;
-//    }
 
     @Transactional
     @Override
