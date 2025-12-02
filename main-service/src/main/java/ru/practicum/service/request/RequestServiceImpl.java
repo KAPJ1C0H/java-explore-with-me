@@ -71,6 +71,7 @@ public class RequestServiceImpl implements RequestService {
         if (event.getParticipantLimit() == 0) request.setStatus(RequestStatus.CONFIRMED);
         return RequestMapper.toRequestDto(requestRepository.save(request));
     }
+
     @Transactional
     @Override
     public RequestStatusUpdateResult updateRequests(Long userId, Long eventId, RequestStatusUpdateDto requestStatusUpdateDto) {
