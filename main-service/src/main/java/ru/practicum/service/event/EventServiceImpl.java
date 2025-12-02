@@ -65,7 +65,6 @@ public class EventServiceImpl implements EventService {
         event.setRequestModeration(newEvent.getRequestModeration() != null ? newEvent.getRequestModeration() : true);
         Event saveEvent = eventRepo.save(event);
         saveEvent.setState(EventStat.PENDING);
-        //  saveEvent.setViews(statsService.getStats(saveEvent.getCreatedOn(), LocalDateTime.now(), "/users/{userId}/events"));
         log.debug("Event pass validation");
         return eventMapper.toEventFullDto(saveEvent);
     }

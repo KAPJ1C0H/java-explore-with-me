@@ -7,7 +7,7 @@ stats-server:
 logging:
   level:
     root: INFO
-    ru.practicum: INFO #DEBUG
+    ru.practicum: INFO
     sun.rmi: INFO
     javax.management: INFO
 
@@ -24,7 +24,7 @@ spring:
         jdbc:
           time_zone: UTC
   datasource:
-    url: jdbc:postgresql://ewm-db:5432/ewm-service #jdbc:postgresql://localhost:6543/ewm-service
+    url: jdbc:postgresql://ewm-db:5432/ewm-service
     username: postgres
     password: postgres
   sql:
@@ -34,25 +34,6 @@ spring:
     format:
       date-time: yyyy-MM-dd HH:mm:ss
 
----
-#spring:
-#  config:
-#    activate:
-#      on-profile: ci,test
-#  jpa:
-#    hibernate:
-#      ddl-auto: validate
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.H2Dialect
-#  datasource:
-#    driver-class-name: org.h2.Driver
-#    url: jdbc:h2:mem:ewm;
-#    username: test
-#    password: test
-#  sql:
-#    init:
-#      mode: always
 ru.practicum.client:
   server:
     host: stats-server
