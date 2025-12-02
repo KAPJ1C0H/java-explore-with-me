@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class TimeValidationError extends RuntimeException {
-    public TimeValidationError(String message) {
+public class CommentValidationError extends RuntimeException {
+    public CommentValidationError(String message) {
         super(message);
     }
 }
