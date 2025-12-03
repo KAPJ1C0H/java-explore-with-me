@@ -42,7 +42,6 @@ public class StatsController {
             @RequestParam(defaultValue = "false") boolean unique
     ) {
         log.info("start: {}, end: {}, uris: {}", start, end, uris);
-
         List<ViewStats> viewStats = statsService.getViewStats(start, end, uris, unique);
         return statsMapper.toViewListResponse(viewStats);
     }
